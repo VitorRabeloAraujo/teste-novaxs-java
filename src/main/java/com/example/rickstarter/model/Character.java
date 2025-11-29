@@ -1,6 +1,7 @@
 package com.example.rickstarter.model;
 
 import java.util.List;
+import com.google.gson.annotations.SerializedName;
 
 public class Character {
 
@@ -8,6 +9,8 @@ public class Character {
     private String name;
     private String status;
     private String species;
+
+    @SerializedName("episode")
     private List<String> episodes;
 
     public Long getId() {

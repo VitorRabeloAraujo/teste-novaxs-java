@@ -1,10 +1,16 @@
 package com.example.rickstarter.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Episode {
 
     private Long id;
     private String name;
+
+    @SerializedName("air_date")
     private String airDate;
+
+    @SerializedName("episode")
     private String episodeCode;
 
     public Long getId() {

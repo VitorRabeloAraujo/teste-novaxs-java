@@ -19,6 +19,11 @@ public class EpisodeService {
         return repository.findAll(page, size);
     }
 
+    public List<Episode> findAll() {
+        PageResponse<Episode> response = repository.findAll(0, Integer.MAX_VALUE);
+        return response.getContent();
+    }
+
     public Optional<Episode> findById(Long id) {
         return repository.findById(id);
     }

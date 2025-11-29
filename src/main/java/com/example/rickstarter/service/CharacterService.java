@@ -19,6 +19,11 @@ public class CharacterService {
         return repository.findAll(page, size);
     }
 
+    public List<Character> findAll() {
+        PageResponse<Character> response = repository.findAll(0, Integer.MAX_VALUE);
+        return response.getContent();
+    }
+
     public Optional<Character> findById(Long id) {
         return repository.findById(id);
     }
