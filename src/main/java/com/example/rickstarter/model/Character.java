@@ -1,6 +1,5 @@
 package com.example.rickstarter.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class Character {
@@ -9,8 +8,6 @@ public class Character {
     private String name;
     private String status;
     private String species;
-
-    @JsonProperty("episode")
     private List<String> episodes;
 
     public Long getId() {
