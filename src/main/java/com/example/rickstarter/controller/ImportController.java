@@ -1,7 +1,6 @@
-
 package com.example.rickstarter.controller;
 
-import static spark.Spark.*;
+import static spark.Spark.get;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,7 @@ import com.example.rickstarter.service.ImportService;
 import com.example.rickstarter.util.JsonUtil;
 
 public class ImportController {
+
     private final ImportService service;
 
     public ImportController(ImportService service) {
@@ -22,15 +22,19 @@ public class ImportController {
     private void setup() {
         get("/import", (req, res) -> {
             res.type("application/json");
-            try {                
+            try {
                 List<Character> characters = service.importAllCharacters();
-                List<Episode> episodes = new java.util.ArrayList<>();
+                List<Episode> episodes = new ArrayList<>();
+
                 for (Character character : characters) {
-                    for (String episodeUrl : character.episode) {
-                        Episode episode = service.importEpisode(episodeUrl);
-                        episodes.add(episode);
+                    if (character.getEpisodes() != null) {
+                        for (String episodeUrl : character.getEpisodes()) {
+                            Episode episode = service.importEpisode(episodeUrl);
+                            episodes.add(episode);
+                        }
                     }
                 }
+
                 return JsonUtil.toJson(characters);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -38,6 +42,7 @@ public class ImportController {
                 return JsonUtil.toJson(java.util.Map.of("error", e.getMessage()));
             }
         });
+
         get("/speciesByEpisode", (req, res) -> {
             throw new Exception("Not implemented yet");
         });
